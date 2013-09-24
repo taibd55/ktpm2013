@@ -51,7 +51,7 @@ class TriangleTest(unittest.TestCase):
         self.assertEqual(checkTGCan(4.0,5.0,3.0),"khong la tam giac can")
     def testTGCan4(self):
         self.assertEqual(checkTGCan(3.0,3.0,3.0),"la tam giac can")
-    def testTGCan4(self):
+    def testTGCan5(self):
         self.assertEqual(checkTGCan(2.0**32-1,2.0**32-1,3.0),"la tam giac can")
 #kiem tra tam giac vuong:
     def testTGVuong1(self):
