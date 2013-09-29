@@ -1,7 +1,7 @@
 import unittest
 import math
 import decimal
-from test import *
+from triangle import *
 
 class TriangleTest(unittest.TestCase):
 #kiem tra xem 3 canh co la 1 tam giac
@@ -36,11 +36,11 @@ class TriangleTest(unittest.TestCase):
     def testTriangle15(self):
         self.assertEqual(detect_triangle(4.0,2.0,3.0),"tam giac binh thuong")
     def testTriangle16(self):
-        self.assertEqual(detect_triangle(2,2.0,3.0),"input khong hop le")
+        self.assertEqual(detect_triangle(2,2.0,3.0),"tam giac can")
     def testTriangle17(self):
-        self.assertEqual(detect_triangle(2.0,2,3.0),"input khong hop le")
+        self.assertEqual(detect_triangle(2.0,2,3.0),"tam giac can")
     def testTriangle18(self):
-        self.assertEqual(detect_triangle(2.0,2.0,3),"input khong hop le")
+        self.assertEqual(detect_triangle(2.0,2.0,3),"tam giac can")
 #kiem tra 3 canh co la tam giac can..
     def testTGCan1(self):
         self.assertEqual(detect_triangle(2.0,2.0,3.0),"tam giac can")
@@ -49,7 +49,7 @@ class TriangleTest(unittest.TestCase):
     def testTGCan3(self):
         self.assertEqual(detect_triangle(2.0,3.0,2.0),"tam giac can")
     def testTGCan4(self):
-        self.assertEqual(detect_triangle(2.0**32-1,2.0**32-1,3.0),"tam giac can")
+        self.assertEqual(detect_triangle(2.0**32-1,5.0,2.0**32-1 ),"tam giac can")
 #kiem tra tam giac vuong:
     def testTGVuong1(self):
         self.assertEqual(detect_triangle(3.0,4.0,5.0),"tam giac vuong")

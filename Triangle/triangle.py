@@ -2,7 +2,7 @@ import math
 import decimal
 #kiem tra kieu float...
 def checkType(x):
-    if isinstance(x,float) == 1:
+    if type(x) in [int,float,long]:
         return 1
     else: 
         return 0
