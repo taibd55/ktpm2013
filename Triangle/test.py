@@ -1,68 +1,63 @@
-#kiem tra kieu float...
-def checkType(x):
-    if isinstance(x,float) == 1 :
-        return 1
-    else: 
-        return 0
-    
-#kiem tra pham vi mien gia tri cua so
-def checkLength(y):
-    if checkType(y) == 1:
-        if (y > 0.0) & (y <= (2.0**32-1)):
-            return 1
-    else :
-        return 0
+import unittest
+import math
+import decimal
+from test import *
 
-#kiem tra 3 canh co la mot tam giac
-def checkTriangle(x,y,z):
-    if (checkLength(x) == 1) & (checkLength(y) == 1) & (checkLength(z) == 1) :
-        if ( (x+y) > z) & ( (y+z) > x) & ( (z+x) > y):
-            return "la tam giac"
-        else :
-            return "khong la tam giac"
-    else :
-        return "khong la tam giac"
-
-#kiem tra 3 canh co la tam giac can khong
-def checkTGCan(x,y,z):
-    if checkTriangle(x,y,z) == "la tam giac" :
-        if (x==y) | (y==z) | (z==x):
-            return "la tam giac can"
-        else :
-            return "khong la tam giac can"
-    else :
-        return "khong la tam giac can"
-    
-#kiem tra 3 canh co la tam giac vuong khong
-def checkTGVuong(x,y,z):
-    if checkTriangle(x,y,z) == "la tam giac" :
-        if (((x**2 + y**2)- z**2)<= 0.00003 ) | (((y**2+z**2)-x**2)<=0.00003) | (((z**2+x**2)-y**2)<=0.00003):
-            return "la tam giac vuong"
-        else :
-            return "khong la tam giac vuong"
-    else :
-        return "khong la tam giac vuong"
-
-#kiem tra 3 canh co la tam giac vuong can
-def checkTGVuongCan(x,y,z):
-    if checkTriangle(x,y,z) == "la tam giac" :
-        if (((x**2 + y**2) - z**2) <= 0.00003) & (x==y):
-            return "la tam giac vuong can"
-        if (((y**2+z**2) - x**2) <= 0.00003) & (y==z):
-            return "la tam giac vuong can"
-        if (((z**2+x**2) - y**2) <= 0.00003) & (z==x):
-            return "la tam giac vuong can"
-    else :
-        return "khong la tam giac vuong can"
-    return "khong la tam giac vuong can"
-
-#kiem tra 3 canh co la tam giac deu
-def checkTGDeu(x,y,z):
-    if checkTriangle(x,y,z) == "la tam giac" :
-        if x==y==z:
-            return "la tam giac deu"
-        else :
-            return "khong la tam giac deu"
-    else :
-        return "khong la tam giac deu"
-
+class TriangleTest(unittest.TestCase):
+#kiem tra xem 3 canh co la 1 tam giac
+    def testTriangle1(self):
+        self.assertEqual(detect_triangle("1",2.0,3.0),"input khong hop le")
+    def testTriangle2(self):
+        self.assertEqual(detect_triangle(1.0,"2",3.0),"input khong hop le")
+    def testTriangle3(self):
+        self.assertEqual(detect_triangle(1.0,2.0,"3"),"input khong hop le")
+    def testTriangle4(self):
+        self.assertEqual(detect_triangle("1.0","2.0",3),"input khong hop le")
+    def testTriangle5(self):
+        self.assertEqual(detect_triangle("1.0",2.0,"3"),"input khong hop le")
+    def testTriangle6(self):
+        self.assertEqual(detect_triangle(1.0,"2.0","3"),"input khong hop le")
+    def testTriangle7(self):
+        self.assertEqual(detect_triangle("1.0","2.0","3"),"input khong hop le")
+    def testTriangle8(self):
+        self.assertEqual(detect_triangle(-1.0,2.0,3.0),"input khong hop le")
+    def testTriangle9(self):
+        self.assertEqual(detect_triangle(1.0,-2.0,3.0),"input khong hop le")
+    def testTriangle10(self):
+        self.assertEqual(detect_triangle(1.0,2.0,-3.0),"input khong hop le")
+    def testTriangle11(self):
+        self.assertEqual(detect_triangle(-1.0,-2.0,3.0),"input khong hop le")
+    def testTriangle12(self):
+        self.assertEqual(detect_triangle(1.0,-2.0,-3.0),"input khong hop le")
+    def testTriangle13(self):
+        self.assertEqual(detect_triangle(-1.0,2.0,-3.0),"input khong hop le")
+    def testTriangle14(self):
+        self.assertEqual(detect_triangle(1.0,2.0,3.0),"input khong hop le")
+    def testTriangle15(self):
+        self.assertEqual(detect_triangle(4.0,2.0,3.0),"tam giac binh thuong")
+    def testTriangle16(self):
+        self.assertEqual(detect_triangle(2,2.0,3.0),"input khong hop le")
+    def testTriangle17(self):
+        self.assertEqual(detect_triangle(2.0,2,3.0),"input khong hop le")
+    def testTriangle18(self):
+        self.assertEqual(detect_triangle(2.0,2.0,3),"input khong hop le")
+#kiem tra 3 canh co la tam giac can..
+    def testTGCan1(self):
+        self.assertEqual(detect_triangle(2.0,2.0,3.0),"tam giac can")
+    def testTGCan2(self):
+        self.assertEqual(detect_triangle(3.0,2.0,2.0),"tam giac can")
+    def testTGCan3(self):
+        self.assertEqual(detect_triangle(2.0,3.0,2.0),"tam giac can")
+    def testTGCan4(self):
+        self.assertEqual(detect_triangle(2.0**32-1,2.0**32-1,3.0),"tam giac can")
+#kiem tra tam giac vuong:
+    def testTGVuong1(self):
+        self.assertEqual(detect_triangle(3.0,4.0,5.0),"tam giac vuong")
+#kiem tra tam giac vuong can:
+    def testTGVuongCan1(self):
+        self.assertEqual(detect_triangle(2.0,2.0,math.sqrt(8.0)),"tam giac vuong can")
+#kiem tra tam giac deu:
+    def testTGDeu1(self):
+        self.assertEqual(detect_triangle(3.0,3.0,3.0),"tam giac deu")
+if __name__ == '__main__':
+    unittest.main()
