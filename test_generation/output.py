@@ -53,5 +53,5 @@ if __name__ == '__main__':
                     setattr(TestSequense, test_name, test)
                 unittest.main()
             else :
-                print "wrong input"
+                raise Exception("wrong input")
 f.close()
